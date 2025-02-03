@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/viewmodels/car_viewmodel.dart';
-import 'package:nvvmproject/views/add_new_car.dart';
+import 'package:nvvmproject/home/viewmodels/car_viewmodel.dart';
+import 'package:nvvmproject/car_add/add_new_car.dart';
 import 'package:provider/provider.dart';
 
 class CarView extends StatefulWidget {
@@ -32,6 +32,9 @@ class _CarViewState extends State<CarView> {
                       MaterialPageRoute(builder: (context) => AddNewCar()));
                 },
                 child: Text('Adicionar novo carro')),
+            SizedBox(
+              height: 10,
+            ),
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -40,11 +43,16 @@ class _CarViewState extends State<CarView> {
               },
               child: Text("Apagar carros"),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: carModel.listaDeCarros.length,
                 itemBuilder: (context, index) {
+                  final car = carModel.listaDeCarros[index];
+                  final isFavorite = carModel.listaFavoritos.contains(car);
                   return SizedBox(
                     height: 290,
                     child: Card(
@@ -63,7 +71,6 @@ class _CarViewState extends State<CarView> {
                           children: [
                             Container(
                               height: 200,
-                              width: MediaQuery.of(context).size.width,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(20),
@@ -71,7 +78,7 @@ class _CarViewState extends State<CarView> {
                                 ),
                                 child: Image.network(
                                   carModel.listaDeCarros[index].fotoDoCarro,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
@@ -112,20 +119,43 @@ class _CarViewState extends State<CarView> {
                                       ),
                                     ],
                                   ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "Cor: ${carModel.listaDeCarros[index].corDoCarro}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15,
+                                  SizedBox(
+                                    height: 60,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          "Cor: ${carModel.listaDeCarros[index].corDoCarro}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
                                         ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text("Reservar"),
-                                      )
-                                    ],
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: isFavorite
+                                                ? Theme.of(context).primaryColor
+                                                : Colors.green,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (isFavorite) {
+                                                // Se o carro já estiver nos favoritos, remova-o
+                                                carModel.listaFavoritos
+                                                    .remove(car);
+                                              } else {
+                                                // Se o carro não estiver nos favoritos, adicione-o
+                                                carModel.adicionarFav(index);
+                                              }
+                                            });
+                                          },
+                                          child: isFavorite
+                                              ? Text('Reservardo')
+                                              : Text('Reservar'),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

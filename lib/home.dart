@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/views/car_view.dart';
+import 'package:nvvmproject/favoritos/favorites_view.dart';
+import 'package:nvvmproject/home/car_view.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
 }
-class _HomeState extends State<Home> {
 
+class _HomeState extends State<Home> {
   int _indexPage = 0;
   PageController _pageController = PageController();
 
-  void mudarPage(int indexNovo){
+  void mudarPage(int indexNovo) {
     setState(() {
       _indexPage = indexNovo;
     });
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = [
     CarView(),
-    Container(),
+    FavoritesView(),
     Container(),
   ];
 
@@ -30,7 +32,7 @@ class _HomeState extends State<Home> {
         title: Text("CarRent"),
         centerTitle: true,
       ),
-      body:_pages[_indexPage],
+      body: _pages[_indexPage],
       bottomNavigationBar: BottomNavigationBar(
         onTap: mudarPage,
         currentIndex: _indexPage,
@@ -38,8 +40,12 @@ class _HomeState extends State<Home> {
         iconSize: 25,
         selectedFontSize: 15,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.directions_car), label: 'Carros',),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Reservados'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_car),
+            label: 'Carros',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Reservados'),
         ],
       ),
     );

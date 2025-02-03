@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/models/car_model.dart';
+import 'package:nvvmproject/home/models/car_model.dart';
 import 'package:intl/intl.dart';
 
 class CarViewmodel extends ChangeNotifier {
@@ -27,4 +27,7 @@ class CarViewmodel extends ChangeNotifier {
     return formatter.format(valor);
   }
 
+  void adicionarFav(index) {
+    listaFavoritos.add(listaDeCarros[index]);
+  }
 }

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nvvmproject/home.dart';
-import 'package:nvvmproject/viewmodels/car_viewmodel.dart';
-import 'package:nvvmproject/viewmodels/counter_viewmodel.dart';
-import 'package:nvvmproject/views/car_view.dart';
-import 'package:nvvmproject/views/counter_view.dart';
+import 'package:nvvmproject/home/viewmodels/car_viewmodel.dart';
+import 'package:nvvmproject/home/car_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => CounterViewmodel()),
       ChangeNotifierProvider(create: (_) => CarViewmodel()),
     ],
     child: MyApp(),
