@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/home/viewmodels/car_viewmodel.dart';
-import 'package:nvvmproject/car_add/add_new_car.dart';
+import 'package:nvvmproject/features/home/viewmodels/car_viewmodel.dart';
+import 'package:nvvmproject/features/car_add/add_new_car.dart';
 import 'package:provider/provider.dart';
 
 class CarView extends StatefulWidget {
@@ -67,10 +67,10 @@ class _CarViewState extends State<CarView> {
                       child: Padding(
                         padding: EdgeInsets.all(0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               height: 200,
+                              width: MediaQuery.of(context).size.width,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(20),
@@ -78,7 +78,7 @@ class _CarViewState extends State<CarView> {
                                 ),
                                 child: Image.network(
                                   carModel.listaDeCarros[index].fotoDoCarro,
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -104,6 +104,7 @@ class _CarViewState extends State<CarView> {
                                         style: TextStyle(
                                           fontSize: 30,
                                           fontWeight: FontWeight.w600,
+                                          color: Colors.black,
                                         ),
                                       ),
                                       Text(
@@ -130,6 +131,7 @@ class _CarViewState extends State<CarView> {
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
+                                            color: Colors.black,
                                           ),
                                         ),
                                         ElevatedButton(

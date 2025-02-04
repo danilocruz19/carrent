@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/home/viewmodels/car_viewmodel.dart';
+import 'package:nvvmproject/features/home/viewmodels/car_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesView extends StatefulWidget {
@@ -19,8 +19,8 @@ class _FavoritesViewState extends State<FavoritesView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(
-                    color: Colors.red,
+                  LinearProgressIndicator(
+                    color: Colors.redAccent,
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -38,7 +38,7 @@ class _FavoritesViewState extends State<FavoritesView> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(carModel.listaFavoritos[index].nomeDoCarro),
-                  trailing: Text(carModel.listaFavoritos[index].corDoCarro),
+                  subtitle: Text(carModel.listaFavoritos[index].corDoCarro),
                 );
               },
             ),

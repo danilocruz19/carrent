@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nvvmproject/home/models/car_model.dart';
+import 'package:nvvmproject/features/home/models/car_model.dart';
 import 'package:intl/intl.dart';
 
 class CarViewmodel extends ChangeNotifier {
