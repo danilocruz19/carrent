@@ -10,14 +10,27 @@ class CarViewmodel extends ChangeNotifier {
   List<CarModel> listaDeCarros = [];
   List<CarModel> listaFavoritos = [];
 
-  void adicionarCarros(String nomeDoCarro, String corDoCarro,
-      double valorDoCarro, String fotoDoCarro) {
+  void adicionarCarros(
+    String nomeDoCarro,
+    String corDoCarro,
+    double valorDoCarro,
+    String fotoDoCarro,
+    String cidadeDoCarro,
+    String marcaDoCarro,
+    bool automaticoCarro,
+    String quilometragemCarro,
+  ) {
     listaDeCarros.add(
       CarModel(
-          nomeDoCarro: nomeDoCarro,
-          valorDoCarro: valorDoCarro,
-          corDoCarro: corDoCarro,
-          fotoDoCarro: fotoDoCarro),
+        nomeDoCarro: nomeDoCarro,
+        valorDoCarro: valorDoCarro,
+        corDoCarro: corDoCarro,
+        fotoDoCarro: fotoDoCarro,
+        cidadeCarro: cidadeDoCarro,
+        marcaCarro: marcaDoCarro,
+        quilometragemCarro: quilometragemCarro,
+        automaticoCarro: automaticoCarro,
+      ),
     );
     notifyListeners();
   }
@@ -29,5 +42,10 @@ class CarViewmodel extends ChangeNotifier {
 
   void adicionarFav(index) {
     listaFavoritos.add(listaDeCarros[index]);
+  }
+
+  void setAutomatico(bool value) {
+    _carModel.automaticoCarro = value;
+    notifyListeners();
   }
 }

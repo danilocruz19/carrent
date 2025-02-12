@@ -14,7 +14,12 @@ class _AddNewCarState extends State<AddNewCar> {
   TextEditingController _controllerCor = TextEditingController();
   TextEditingController _controllerPreco = TextEditingController();
   TextEditingController _controllerFoto = TextEditingController();
+  TextEditingController _controllerMarca = TextEditingController();
+  TextEditingController _controllerQuilo = TextEditingController();
+  TextEditingController _controllerCidade = TextEditingController();
+
   String _urlFoto = '';
+  bool automaticoOuNao = false;
 
   @override
   void initState() {
@@ -40,12 +45,27 @@ class _AddNewCarState extends State<AddNewCar> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextField(
+                  controller: _controllerMarca,
+                  decoration: InputDecoration(labelText: 'Marca do carro'),
+                ),
+                TextField(
                   controller: _controllerNome,
                   decoration: InputDecoration(labelText: 'Nome do carro'),
                 ),
                 TextField(
+                  controller: _controllerQuilo,
+                  decoration:
+                      InputDecoration(labelText: 'Quilometragem do carro'),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: _controllerCidade,
+                  decoration: InputDecoration(labelText: 'Cidade do carro'),
+                ),
+                TextField(
                   controller: _controllerPreco,
                   decoration: InputDecoration(labelText: 'Valor do carro'),
+                  keyboardType: TextInputType.number,
                 ),
                 TextField(
                   controller: _controllerCor,
@@ -67,6 +87,20 @@ class _AddNewCarState extends State<AddNewCar> {
                     });
                   },
                 ),
+                CheckboxListTile(
+                  value: automaticoOuNao,
+                  onChanged: (value) {
+                    setState(() {
+                      automaticoOuNao = value!;
+                    });
+                  },
+                  title: Text(
+                    'Automático',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(height: 20),
                 _urlFoto.isNotEmpty
                     ? Container(
@@ -87,15 +121,17 @@ class _AddNewCarState extends State<AddNewCar> {
                 ElevatedButton(
                     onPressed: () {
                       if (_key.currentState?.validate() ?? false) {
-                        // Adiciona o carro se todos os dados forem válidos
                         carModel.adicionarCarros(
                           _controllerNome.text,
                           _controllerCor.text,
                           double.parse(_controllerPreco.text),
                           _controllerFoto.text,
+                          _controllerCidade.text,
+                          _controllerMarca.text.toUpperCase(),
+                          automaticoOuNao,
+                          _controllerQuilo.text,
                         );
 
-                        // Volta para a tela anterior após adicionar o carro
                         Navigator.pop(context);
                       }
                     },
