@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nvvmproject/configs/theme.dart';
+import 'package:nvvmproject/features/configuracoes/configuracoes.dart';
 import 'package:nvvmproject/features/favoritos/favorites_view.dart';
 import 'package:nvvmproject/features/home/car_view.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _pages = [
     CarView(),
     FavoritesView(),
-    Container(),
+    Configuracoes(),
   ];
 
   @override
@@ -34,26 +35,6 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("CarRent"),
         centerTitle: true,
-      ),
-      drawer: Drawer(
-        backgroundColor: const Color.fromARGB(255, 29, 28, 28),
-        child: DrawerHeader(
-            child: Column(
-          children: [
-            SwitchListTile(
-              value: themeApp.themeOn,
-              onChanged: (value) => themeApp.mudarThema(value),
-              title: Text(
-                'Modo noturno',
-                style: TextStyle(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              activeColor: Colors.green,
-            )
-          ],
-        )),
       ),
       body: _pages[_indexPage],
       bottomNavigationBar: BottomNavigationBar(
@@ -69,6 +50,8 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Reservados'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Configurações')
         ],
       ),
     );

@@ -33,12 +33,17 @@ class _FavoritesViewState extends State<FavoritesView> {
                 ],
               ),
             )
-          : ListView.builder(
+          : ListView.separated(
+              separatorBuilder: (context, index) => Divider(),
               itemCount: carModel.listaFavoritos.length, // Defina o itemCount
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(carModel.listaFavoritos[index].nomeDoCarro),
                   subtitle: Text(carModel.listaFavoritos[index].corDoCarro),
+                  trailing: Text(
+                    carModel.numberFormatter(
+                        carModel.listaFavoritos[index].valorDoCarro ?? 0.0),
+                  ),
                 );
               },
             ),
