@@ -19,7 +19,7 @@ class _FavoritesViewState extends State<FavoritesView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  LinearProgressIndicator(
+                  CircularProgressIndicator(
                     color: Colors.redAccent,
                   ),
                   SizedBox(height: 20),

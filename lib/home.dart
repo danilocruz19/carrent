@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _indexPage = 0;
-  PageController _pageController = PageController();
 
   void mudarPage(int indexNovo) {
     setState(() {
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final themeApp = context.watch<ThemeApp>();
+    context.watch<ThemeApp>();
     return Scaffold(
       appBar: AppBar(
         title: Text("CarRent"),

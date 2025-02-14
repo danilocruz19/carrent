@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nvvmproject/features/edit_car/edit_car_view.dart';
+import 'package:nvvmproject/features/home/models/car_model.dart';
 import 'package:nvvmproject/features/home/viewmodels/car_viewmodel.dart';
 import 'package:nvvmproject/features/car_add/add_new_car.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +13,70 @@ class CarView extends StatefulWidget {
 }
 
 class _CarViewState extends State<CarView> {
+  final TextEditingController nomeCarroController = TextEditingController();
+  final TextEditingController marcaCarroController = TextEditingController();
+  final TextEditingController quilometragemController = TextEditingController();
+  final TextEditingController valorCarroController = TextEditingController();
+  final TextEditingController fotoCarroController = TextEditingController();
+
+  void _showDialog(BuildContext context, CarViewmodel car, index) {
+    nomeCarroController.text = car.listaDeCarros[index].nomeDoCarro;
+    marcaCarroController.text = car.listaDeCarros[index].marcaCarro;
+    quilometragemController.text = car.listaDeCarros[index].quilometragemCarro;
+    valorCarroController.text =
+        car.listaDeCarros[index].valorDoCarro.toString();
+    fotoCarroController.text = car.listaDeCarros[index].fotoDoCarro;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Editar informações'),
+          content: Container(
+            height: 300,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: marcaCarroController,
+                ),
+                TextFormField(
+                  controller: nomeCarroController,
+                ),
+                TextFormField(
+                  controller: quilometragemController,
+                ),
+                TextFormField(
+                  controller: valorCarroController,
+                ),
+                TextFormField(
+                  controller: fotoCarroController,
+                ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      car.listaDeCarros[index].marcaCarro =
+                          marcaCarroController.text;
+                      car.listaDeCarros[index].nomeDoCarro =
+                          nomeCarroController.text;
+                      car.listaDeCarros[index].quilometragemCarro =
+                          quilometragemController.text;
+                      car.listaDeCarros[index].valorDoCarro =
+                          double.tryParse(valorCarroController.text);
+                      car.listaDeCarros[index].fotoDoCarro =
+                          fotoCarroController.text;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Atualizar'),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final carModel = context.watch<CarViewmodel>();
@@ -176,17 +240,7 @@ class _CarViewState extends State<CarView> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          setState(() {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditCarPage(
-                                                  car: car,
-                                                ),
-                                              ),
-                                            );
-                                          });
+                                          _showDialog(context, carModel, index);
                                         },
                                         icon: Icon(
                                           Icons.edit,

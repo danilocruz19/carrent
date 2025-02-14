@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nvvmproject/configs/theme.dart';
 import 'package:nvvmproject/home.dart';
 import 'package:nvvmproject/features/home/viewmodels/car_viewmodel.dart';
-import 'package:nvvmproject/features/home/car_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeApp = context.watch<ThemeApp>();
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: themeApp.themeOn
           ? ThemeData.dark(
