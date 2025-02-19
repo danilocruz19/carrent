@@ -3,6 +3,7 @@ import 'package:nvvmproject/configs/theme.dart';
 import 'package:nvvmproject/features/configuracoes/configuracoes.dart';
 import 'package:nvvmproject/features/favoritos/favorites_view.dart';
 import 'package:nvvmproject/features/home/car_view.dart';
+import 'package:nvvmproject/features/novos/novos.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -25,11 +26,12 @@ class _HomeState extends State<Home> {
     CarView(),
     FavoritesView(),
     Configuracoes(),
+    Novos(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    context.watch<ThemeApp>();
+    final teste = context.watch<ThemeApp>();
     return Scaffold(
       appBar: AppBar(
         title: Text("CarRent"),
@@ -39,6 +41,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: mudarPage,
         currentIndex: _indexPage,
+        selectedItemColor: teste.themeOn ? Colors.amber : Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey[500],
         iconSize: 25,
         selectedFontSize: 15,
@@ -48,9 +51,17 @@ class _HomeState extends State<Home> {
             label: 'Carros',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Reservados'),
+            icon: Icon(Icons.favorite),
+            label: 'Reservados',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Configurações')
+            icon: Icon(Icons.settings),
+            label: 'Configurações',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.hourglass_bottom),
+            label: 'Novos',
+          )
         ],
       ),
     );
